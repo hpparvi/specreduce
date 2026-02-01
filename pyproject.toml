@@ -28,13 +28,13 @@ docs = [
     "sphinx-copybutton",
     "sphinx-design",
     "matplotlib>=3.7",
-    "photutils>=1.0",
+    "photutils>=1.11",
     "synphot",
     "nbsphinx",
     "ipykernel"
 ]
 all = [
-    "photutils>=1.0",
+    "photutils>=1.11",
     "synphot",
 ]
 
