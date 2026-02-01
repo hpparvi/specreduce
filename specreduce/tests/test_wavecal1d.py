@@ -8,7 +8,7 @@ from matplotlib import pyplot as plt
 from matplotlib.figure import Figure
 from numpy import array
 
-from specreduce.compat import Spectrum
+from specutils import Spectrum
 from specreduce.wavecal1d import WavelengthCalibration1D
 
 ref_pixel = 250

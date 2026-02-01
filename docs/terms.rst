@@ -65,7 +65,7 @@ Extraction
 ==========
 
 - The process of converting raw spectrum data on 2D image into flux versus
-  spectral axis or pixel (i.e. Spectrum1D), not necessarily flux or spectral
+  spectral axis or pixel (i.e. Spectrum), not necessarily flux or spectral
   calibration.
 
 Rectified ND spectrum
@@ -227,8 +227,8 @@ MOS (Multi-Object Spectroscopy)
 - Also used as a shorthand for “the not spectral unit part of a 1D spectrum”
   (would that be the “dependent variable”?)
 - Oftentimes used to mean “flux density”
-- `Spectrum1D
-  <https://specutils.readthedocs.io/en/stable/api/specutils.Spectrum1D.html#specutils.Spectrum1D>`__
+- `Spectrum
+  <https://specutils.readthedocs.io/en/stable/api/specutils.Spectrum.html#specutils.Spectrum>`__
   uses the attribute 'flux'. Should this be renamed to 'flux_density'?
 
     - The intent in specutils was to not agonize over this but just accept that
@@ -246,7 +246,7 @@ Flux Density
 
 - Collection of 1D spectra in a 2D array (image?), one spectrum per row.
 - Shared spectral axis.
-- This is the format of specutils.Spectrum1D when it's a “vector” spectrum1D
+- This is the format of specutils.Spectrum when it's a “vector” spectrum1D
 
 *Data cube*
 ===========
@@ -280,12 +280,12 @@ Data Structures
 
 - Python Data structures, which are Python classes.
 
-    - NDData/NDCube/SpectrumCollection, Spectrum1D etc.  
+    - NDData/NDCube/SpectrumCollection, Spectrum etc.  
     - CCDData. Subclass of NDData
     - AstroData - from DRAGONS (collection of NDData-like objects, mapped to a
       file, plus metadata abstraction etc.)
     - Lots of classes to represent spectra
-    - Link to issue about renaming Spectrum1D class in specutils.
+    - Link to issue about renaming Spectrum class in specutils.
     - arrays
 
 *Data Model*
@@ -439,7 +439,7 @@ API
 *Spectral class*
 ================
 
-- E.g., Spectrum1D
+- E.g., Spectrum
 - In SDSS, 'class' is short for 'classification'.
 - DESI uses SPECTYPE for spectral type (QSO, GALAXY, STAR)
 

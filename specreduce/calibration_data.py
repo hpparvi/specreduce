@@ -14,7 +14,7 @@ from astropy.utils.exceptions import AstropyUserWarning
 from astropy.coordinates import SpectralCoord
 from specutils.utils.wcs_utils import vac_to_air
 
-from specreduce.compat import Spectrum
+from specutils import Spectrum
 
 __all__ = [
     'get_available_line_catalogs',

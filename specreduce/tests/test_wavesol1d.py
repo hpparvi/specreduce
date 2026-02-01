@@ -6,7 +6,7 @@ from astropy.modeling.polynomial import Polynomial1D
 from astropy.nddata import StdDevUncertainty
 from gwcs import wcs
 from specreduce.wavesol1d import _diff_poly1d, WavelengthSolution1D
-from specreduce.compat import Spectrum
+from specutils import Spectrum
 
 
 ref_pixel = 250.0

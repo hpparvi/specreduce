@@ -12,7 +12,7 @@ from astropy.wcs import WCS as astropy_WCS
 from gwcs.wcs import WCS as gWCS
 from specutils.fitting import find_lines_threshold, fit_lines
 
-from specreduce.compat import Spectrum
+from specutils import Spectrum
 
 __all__ = ["find_arc_lines", "match_lines_wcs"]
 

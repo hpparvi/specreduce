@@ -4,7 +4,7 @@ import pytest
 from astropy.modeling import fitting, models
 from astropy.nddata import NDData
 
-from specreduce.compat import SPECUTILS_LT_2, Spectrum
+from specutils import Spectrum
 from specreduce.tracing import FitTrace
 from specreduce.utils.utils import measure_cross_dispersion_profile
 
@@ -61,11 +61,7 @@ class TestMeasureCrossDispersionProfile():
         images.append(dat)  # test unitless
         images.append(dat * u.DN)
         images.append(NDData(dat * u.DN))
-        if SPECUTILS_LT_2:
-            kwargs = {}
-        else:
-            kwargs = {"spectral_axis_index": dat.ndim - 1}
-        images.append(Spectrum(flux=dat * u.DN, **kwargs))
+        images.append(Spectrum(flux=dat * u.DN, spectral_axis_index=dat.ndim - 1))
 
         for img in images:
 

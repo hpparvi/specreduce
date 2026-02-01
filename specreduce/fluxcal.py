@@ -6,7 +6,7 @@ from astropy.constants import c as cc
 from astropy.table import Table
 from scipy.interpolate import UnivariateSpline
 
-from specreduce.compat import Spectrum
+from specutils import Spectrum
 from specreduce.core import SpecreduceOperation
 
 

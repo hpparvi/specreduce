@@ -4,7 +4,7 @@ import pytest
 from astropy.nddata import NDData, VarianceUncertainty, StdDevUncertainty, InverseVariance
 
 from specreduce.background import Background
-from specreduce.compat import Spectrum
+from specutils import Spectrum
 from specreduce.tracing import FlatTrace, ArrayTrace
 
 

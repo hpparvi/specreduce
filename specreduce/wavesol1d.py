@@ -11,7 +11,7 @@ from numpy.ma import MaskedArray
 from numpy.typing import ArrayLike, NDArray
 from scipy.interpolate import interp1d
 
-from specreduce.compat import Spectrum
+from specutils import Spectrum
 
 
 __all__ = ["WavelengthSolution1D"]

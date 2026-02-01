@@ -208,7 +208,6 @@ intersphinx_mapping.update(
 nitpick_ignore = [
     ("py:class", "ArrayLike"),
     ("py:class", "numpy._typing.ArrayLike"),
-    ("py:class", "specutils.spectra.spectrum1d.Spectrum1D"),
 ]
 
 # Ignore complex type annotations that can't be cross-referenced

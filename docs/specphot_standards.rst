@@ -8,7 +8,7 @@ Introduction
 
 Instrument sensitivity as a function of wavelength is calibrated using observations of
 spectrophotometric standard stars. `specreduce <https://specreduce.readthedocs.io/en/stable/index.html>`_ offers some
-convenience functions for accessing some databases of commonly used standard stars and loading the data into `~specutils.Spectrum1D`
+convenience functions for accessing some databases of commonly used standard stars and loading the data into `~specutils.Spectrum`
 instances.
 
 Supported Databases
@@ -43,7 +43,7 @@ The bulk of them are inherited from IRAF's `onedstds <https://github.com/iraf-co
 some more recently curated datasets from `ESO <https://www.eso.org/sci/observing/tools/standards/spectra/stanlis.html>`_, the
 `Nearby Supernova Factory <https://snfactory.lbl.gov/>`_, and `Gemini
 <https://github.com/GeminiDRSoftware/DRAGONS/tree/master/geminidr/gemini/lookups/spectrophotometric_standards>`_ are included as well. The
-`~specreduce.calibration_data.load_onedstds` function is provided to load these data into `~specutils.Spectrum1D`
+`~specreduce.calibration_data.load_onedstds` function is provided to load these data into `~specutils.Spectrum`
 instances. If `specreduce_data <https://github.com/astropy/specreduce-data/>`_ is not installed, the data will be downloaded from the GitHub
 `repository <https://github.com/astropy/specreduce-data/tree/main/specreduce_data/reference_data/onedstds>`_. The available
 database names and their descriptions are listed here. Please refer to the `specreduce-data repository

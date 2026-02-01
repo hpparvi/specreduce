@@ -12,7 +12,7 @@ from astropy.nddata import (
 from astropy.tests.helper import assert_quantity_allclose
 
 from specreduce.background import Background
-from specreduce.compat import Spectrum
+from specutils import Spectrum
 from specreduce.extract import BoxcarExtract, HorneExtract, OptimalExtract, _align_along_trace
 from specreduce.tracing import FitTrace, FlatTrace, ArrayTrace
 

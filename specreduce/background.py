@@ -9,7 +9,7 @@ from astropy.nddata import VarianceUncertainty
 from astropy.stats import sigma_clip
 from astropy.utils.decorators import deprecated_attribute
 
-from specreduce.compat import SPECUTILS_LT_2, Spectrum
+from specutils import Spectrum
 from specreduce.core import _ImageParser, MaskingOption, ImageLike
 from specreduce.extract import _ap_weight_image
 from specreduce.tracing import Trace, FlatTrace
@@ -375,12 +375,9 @@ class Background(_ImageParser):
             self._orig_uncty_type
         )
 
-        if SPECUTILS_LT_2:
-            kwargs = {}
-        else:
-            kwargs = {"spectral_axis_index": arr.ndim - 1}
         return Spectrum(
-            arr * image.unit, spectral_axis=image.spectral_axis, uncertainty=uncertainty, **kwargs
+            arr * image.unit, spectral_axis=image.spectral_axis, uncertainty=uncertainty,
+            spectral_axis_index=arr.ndim - 1
         )
 
     def bkg_spectrum(self, image=None, bkg_statistic=None) -> Spectrum:
@@ -400,7 +397,7 @@ class Background(_ImageParser):
 
         Returns
         -------
-        `~specutils.Spectrum1D`
+        `~specutils.Spectrum`
             The background 1D spectrum, with flux and uncertainty expressed
             in the same units as the input image (or DN if none were provided).
         """
@@ -436,17 +433,7 @@ class Background(_ImageParser):
             uncertainty.
         """
         image = self._parse_image(image)
-
-        if not SPECUTILS_LT_2:
-            return image - self.bkg_image(image)
-
-        # a compare_wcs argument is needed for Spectrum.subtract() in order to
-        # avoid a TypeError from SpectralCoord when image's spectral axis is in
-        # pixels. it is not needed when image's spectral axis has physical units
-        kwargs = {"compare_wcs": None} if image.spectral_axis.unit == u.pix else {}
-
-        # https://docs.astropy.org/en/stable/nddata/mixins/ndarithmetic.html
-        return image.subtract(self.bkg_image(image), **kwargs)
+        return image - self.bkg_image(image)
 
     def sub_spectrum(self, image=None) -> Spectrum:
         """
