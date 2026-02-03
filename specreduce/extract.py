@@ -11,7 +11,7 @@ from numpy import ndarray
 from scipy.integrate import trapezoid
 from scipy.interpolate import RectBivariateSpline
 
-from specreduce.compat import Spectrum
+from specutils import Spectrum
 from specreduce.core import SpecreduceOperation, ImageLike, MaskingOption
 from specreduce.tracing import Trace, FlatTrace
 
@@ -169,7 +169,7 @@ class BoxcarExtract(SpecreduceOperation):
 
     Returns
     -------
-    spec : `~specutils.Spectrum1D`
+    spec : `~specutils.Spectrum`
         The extracted 1d spectrum expressed in DN and pixel units
     """
 
@@ -666,7 +666,7 @@ class HorneExtract(SpecreduceOperation):
 
         Returns
         -------
-        spec_1d : `~specutils.Spectrum1D`
+        spec_1d : `~specutils.Spectrum`
             The final, Horne extracted 1D spectrum.
         """
         image = image if image is not None else self.image

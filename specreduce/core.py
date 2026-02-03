@@ -9,7 +9,7 @@ import numpy as np
 from astropy import units as u
 from astropy.nddata import VarianceUncertainty, NDData
 
-from specreduce.compat import SPECUTILS_LT_2, Spectrum
+from specutils import Spectrum
 
 __all__ = ["SpecreduceOperation"]
 
@@ -29,7 +29,7 @@ class _ImageParser:
     that are missing in the provided image with generic values.
     Accepted image types are:
 
-        - `~specutils.Spectrum1D` (preferred)
+        - `~specutils.Spectrum` (preferred)
         - `~astropy.nddata.ccddata.CCDData`
         - `~astropy.nddata.ndddata.NDDData`
         - `~astropy.units.quantity.Quantity`
@@ -148,13 +148,9 @@ class _ImageParser:
 
         spectral_axis = getattr(image, "spectral_axis", np.arange(img.shape[disp_axis]) * u.pix)
 
-        if SPECUTILS_LT_2:
-            kwargs = {}
-        else:
-            kwargs = {"spectral_axis_index": img.ndim - 1}
         img = Spectrum(
             img * unit, spectral_axis=spectral_axis, uncertainty=uncertainty, mask=mask,
-            **kwargs
+            spectral_axis_index=img.ndim - 1
         )
         return img
 

@@ -8,7 +8,7 @@ from astropy.table import QTable, hstack
 from gwcs import coordinate_frames as cf
 from gwcs import wcs
 
-from specreduce.compat import Spectrum
+from specutils import Spectrum
 
 __all__ = [
     'WavelengthCalibration1D'
@@ -29,7 +29,7 @@ class WavelengthCalibration1D():
     def __init__(self, input_spectrum, matched_line_list=None, line_pixels=None,
                  line_wavelengths=None, catalog=None, input_model=Linear1D(), fitter=None):
         """
-        input_spectrum: `~specutils.Spectrum1D`
+        input_spectrum: `~specutils.Spectrum`
             A one-dimensional Spectrum calibration spectrum from an arc lamp or similar.
         matched_line_list: `~astropy.table.QTable`, optional
             An `~astropy.table.QTable` table with (minimally) columns named

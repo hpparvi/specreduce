@@ -13,7 +13,7 @@ from scipy import optimize, ndimage
 from scipy.spatial import KDTree
 
 from specreduce.calibration_data import load_pypeit_calibration_lines
-from specreduce.compat import Spectrum
+from specutils import Spectrum
 from specreduce.line_matching import find_arc_lines
 
 __all__ = ["WavelengthCalibration1D"]

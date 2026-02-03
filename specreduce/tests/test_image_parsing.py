@@ -1,7 +1,7 @@
 import numpy as np
 from astropy import units as u
 
-from specreduce.compat import Spectrum
+from specutils import Spectrum
 from specreduce.core import _ImageParser
 from specreduce.extract import HorneExtract
 from specreduce.tracing import FlatTrace

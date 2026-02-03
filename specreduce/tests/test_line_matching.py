@@ -8,7 +8,7 @@ from astropy.nddata import StdDevUncertainty
 from specutils.fitting import fit_generic_continuum
 
 from specreduce.calibration_data import load_pypeit_calibration_lines
-from specreduce.compat import Spectrum
+from specutils import Spectrum
 from specreduce.extract import BoxcarExtract
 from specreduce.line_matching import match_lines_wcs, find_arc_lines
 from specreduce.tracing import FlatTrace
