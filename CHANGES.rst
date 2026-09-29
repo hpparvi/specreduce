@@ -36,6 +36,13 @@ New Features
   the flux along the dispersion axis, so it is insensitive to a smooth continuum
   or residual background and to emission lines. [#XXX]
 
+- Added ``subtract_baseline`` and ``baseline_window`` options to
+  ``line_matching.find_arc_lines`` and ``TiltCorrection.find_arc_lines`` that estimate
+  the baseline flux of the spectrum with a sigma-clipped median (globally, or in running
+  windows) and remove it before the line detection. Baseline subtraction is on by default
+  in ``TiltCorrection.find_arc_lines``, which previously required background-subtracted
+  arc frames to detect any lines. [#XXX]
+
 Bug Fixes
 ^^^^^^^^^
 
@@ -86,6 +93,18 @@ Bug Fixes
   ``noise_factor**2`` flux units regardless of the actual noise, which missed
   all lines in faint spectra and reported noise spikes as lines in noisy or
   background-subtracted ones. [#XXX]
+
+- ``TiltCorrection.find_arc_lines`` now raises a ``ValueError`` when the reference row or
+  any cross-dispersion sample lies outside the image frame, and discards detected lines
+  whose fitted centroid is not finite or falls outside the frame along the dispersion
+  axis. Previously a sample past the frame raised an ``IndexError``, a negative sample
+  silently wrapped around to the opposite edge of the frame, and a failed line fit could
+  crash the nearest-neighbour matching. [#XXX]
+
+- ``TiltSolution.resample`` now propagates the input uncertainty, returned in the same
+  uncertainty class as the input, marks output bins that received a contribution from a
+  masked input pixel, and copies the input metadata to the resampled ``NDData``.
+  Previously all three were dropped. [#XXX]
 
 API Changes
 ^^^^^^^^^^^
