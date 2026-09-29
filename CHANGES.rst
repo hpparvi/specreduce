@@ -36,16 +36,42 @@ New Features
   the flux along the dispersion axis, so it is insensitive to a smooth continuum
   or residual background and to emission lines. [#XXX]
 
-API Changes
-^^^^^^^^^^^
-
-- The legacy ``specreduce.wavelength_calibration.WavelengthCalibration1D``
-  class (deprecated since v1.7.0) now emits an ``AstropyDeprecationWarning``
-  on instantiation, and its removal has been rescheduled from v2.0 to v1.11.
-  Use ``specreduce.wavecal1d.WavelengthCalibration1D`` instead. [#316]
-
 Bug Fixes
 ^^^^^^^^^
+
+- Fixed ``HorneExtract`` for non-flat traces: the flux was rolled to align the
+  trace with the central row, but the variance and mask arrays were not, so the
+  extraction weights were taken from the wrong pixels. This biased both the
+  extracted flux and its uncertainty whenever the variance was not spatially
+  uniform or any pixels were masked. [#XXX]
+
+- Fixed a low bias in ``HorneExtract`` when the pixel variances are derived from
+  the noisy data itself (e.g. the Poisson variance of the observed counts), which
+  underestimated the flux by roughly the inverse of the counts per pixel. Following
+  Horne (1986), the variances are now re-estimated from the extraction model before
+  the final extraction; the new ``model_variance`` argument (default ``True``)
+  controls this. [#XXX]
+
+- The extraction kernel in ``HorneExtract`` is now the fitted Gaussian alone. The
+  background model fitted alongside the profile no longer leaks into the kernel and
+  its normalization, which could drive the extracted flux towards zero where the
+  variance is very small far from the source. [#XXX]
+
+- ``HorneExtract(bkgrd_prof=None)`` now fits the Gaussian profile without a
+  background model instead of silently substituting the default polynomial. [#XXX]
+
+- ``HorneExtract`` now follows the trace at sub-pixel precision. The extraction
+  kernel is evaluated directly on the image grid at each pixel's offset from the
+  trace instead of rolling the image by whole pixels, which left the kernel up to a
+  pixel off the source and lost a fraction ``exp(-d**2 / (4 sigma**2))`` of the flux,
+  up to 18% for a one-pixel-sigma source. The spatial profile is fit in
+  trace-relative coordinates without resampling the image (Horne 1986, Sect. II.A),
+  and the vectorised kernel evaluation makes the extraction about three times
+  faster. [#XXX]
+
+- Added a ``window`` argument to ``HorneExtract`` that restricts the profile fit and
+  the extraction to pixels within a given distance of the trace, keeping other
+  sources on the slit out of the profile fit. [#XXX]
 
 - ``line_matching.find_arc_lines`` now accepts spectra with any of the Astropy
   uncertainty types (``StdDevUncertainty``, ``VarianceUncertainty``, or
@@ -60,6 +86,14 @@ Bug Fixes
   ``noise_factor**2`` flux units regardless of the actual noise, which missed
   all lines in faint spectra and reported noise spikes as lines in noisy or
   background-subtracted ones. [#XXX]
+
+API Changes
+^^^^^^^^^^^
+
+- The legacy ``specreduce.wavelength_calibration.WavelengthCalibration1D``
+  class (deprecated since v1.7.0) now emits an ``AstropyDeprecationWarning``
+  on instantiation, and its removal has been rescheduled from v2.0 to v1.11.
+  Use ``specreduce.wavecal1d.WavelengthCalibration1D`` instead. [#316]
 
 Other changes
 ^^^^^^^^^^^^^
